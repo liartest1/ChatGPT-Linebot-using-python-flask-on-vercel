@@ -7,24 +7,24 @@ import openai
 app = Flask(__name__)
 
 # 設置LineBot的Channel Access Token和Channel Secret
-line_bot_api = LineBotApi(QAEbpvqmuGhyDdPpp3DLZB6mcFUQ+LYRilL/377TN1oUvaU5A/NsguwCGUnOMr8BekXOcasOkC9v0oxnBIuZWoZFR/bXBET9R1STLPM9DT7Z6t4tOfED8usPKHndrJwE+tVEuek7pju5sRbwsfrPewdB04t89/1O/w1cDnyilFU=)
-handler = WebhookHandler(85939a38907cbf190531aa4a65ab818d)
+line_bot_api = LineBotApi("LINE_CHANNEL_ACCESS_TOKEN")
+handler = WebhookHandler("LINE_CHANNEL_SECRET")
 
 # 設置OpenAI API 密鑰
-openai.api_key = sk-proj-JAvUukDHjjcIG37TaF0VT3BlbkFJ4zLBwB3JBS6YZcAJubCO
+openai.api_key = OPENAI_API_KEY
 
 # 與GPT模型交互的函數
 def chat_with_gpt(prompt):
     response = openai.Completion.create(
         engine="davinci-codex",  # 或者你想用的其他引擎
         prompt=prompt,
-        temperature=0.7,
-        max_tokens=150
+        temperature=0,
+        max_tokens=240
     )
     return response.choices[0].text.strip()
 
 # Line的Webhook接口
-@app.route("/callback", methods=['POST'])
+@app.route("/webhook", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
 
