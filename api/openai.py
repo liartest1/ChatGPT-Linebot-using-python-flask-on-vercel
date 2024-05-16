@@ -24,21 +24,21 @@ def chat_with_gpt(prompt):
     return response.choices[0].text.strip()
 
 # Line的Webhook接口
-@app.route("/webhook", methods=['POST'])
-def callback():
-    signature = request.headers['X-Line-Signature']
+# @app.route("/webhook", methods=['POST'])
+# def callback():
+#     signature = request.headers['X-Line-Signature']
 
-    # 獲取request的body
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
+#     # 獲取request的body
+#     body = request.get_data(as_text=True)
+#     app.logger.info("Request body: " + body)
 
-    # 驗證簽名
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        abort(400)
+#     # 驗證簽名
+#     try:
+#         handler.handle(body, signature)
+#     except InvalidSignatureError:
+#         abort(400)
 
-    return 'OK'
+#     return 'OK'
 
 # 處理TextMessage事件
 @handler.add(MessageEvent, message=TextMessage)
