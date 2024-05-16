@@ -16,7 +16,7 @@ openai.api_key = "OPENAI_API_KEY"
 # 與GPT模型交互的函數
 def chat_with_gpt(prompt):
     response = openai.Completion.create(
-        engine="davinci-codex",  # 或者你想用的其他引擎
+        engine="text-davinci-003",  # 或者你想用的其他引擎
         prompt=prompt,
         temperature=0,
         max_tokens=240
